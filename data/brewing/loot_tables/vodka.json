@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags:32,CustomPotionEffects:[{Id:5b,Amplifier:0b,Duration:200},{Id:9b,Amplifier:2b,Duration:200}],CustomPotionColor:16121852}"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Vodka",
+                "color": "yellow",
+                "italic": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

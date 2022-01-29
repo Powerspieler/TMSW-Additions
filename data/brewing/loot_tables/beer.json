@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags:32,CustomPotionEffects: [{Duration: 150, Id: 9b, Amplifier: 1b}],CustomPotionColor:15987543}"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Beer",
+                "color": "yellow",
+                "italic": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

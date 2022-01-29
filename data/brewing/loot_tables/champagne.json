@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{HideFlags:32,CustomPotionEffects:[{Id:5b,Amplifier:1b,Duration:200},{Id:9b,Amplifier:4b,Duration:200}],CustomPotionColor:11599764}"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Champagne",
+                "color": "yellow",
+                "italic": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+execute if block ~ ~1 ~ #minecraft:trapdoors if block ~1 ~ ~ #minecraft:stairs[facing=west,half=top,shape=straight] if block ~1 ~1 ~ #minecraft:walls if block ~1 ~2 ~ #minecraft:walls run scoreboard players set @s BrewValid 1
