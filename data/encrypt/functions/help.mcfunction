@@ -1,0 +1,5 @@
+tellraw @s [{"text":"\n-------------","color":"red"},{"text":"[","color":"gold"},{"text":"Usage of Encrypt","color":"gray"},{"text":"]","color":"gold"},{"text":"-------------\n","color":"red"}]
+tellraw @s [{"text":"Step 1:","color":"blue"}]
+tellraw @s [{"text":"Take a Book and Quill and write your password/key onto the first page of the book\n","color":"yellow"}]
+tellraw @s [{"text":"Step 2:","color":"blue"}]
+tellraw @s [{"text":"Place the Book and Quill in your offhand and type '/trigger Encrypt' to encrypt the item in your mainhand\n","color":"yellow"}]

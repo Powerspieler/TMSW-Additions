@@ -1,0 +1,30 @@
+[
+  {
+    "function": "minecraft:copy_nbt",
+    "source": "this",
+    "ops": [
+      {
+        "source": "Inventory.[{Slot:-106b}].tag.pages.[0]",
+        "target": "Lore.[]",
+        "op": "replace"
+      }
+    ]
+  },
+  {
+    "function": "minecraft:set_lore",
+    "lore": [
+      {
+        "text": "Unique ID: ",
+        "italic": false,
+        "extra": [
+          {
+            "text": "OhThatsATuffOne",
+            "italic": false,
+            "obfuscated": true
+          }
+        ]
+      }
+    ],
+    "replace": false
+  }
+]

@@ -2,6 +2,8 @@
 	"replace": false,
 	"values": [
 		"brewing:init",
-		"brewing:schedule"
+		"brewing:schedule",
+
+		"encrypt:init"
 	]
 }
