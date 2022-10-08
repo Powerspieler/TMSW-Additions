@@ -1,0 +1,13 @@
+name: TMSW-Additions
+version: 1.0
+main: de.powerspieler.tmswadditions.TMSWAdditions
+api-version: 1.19
+
+commands:
+  death:
+    description: Get last point of death
+  map:
+    description: Convert MapIDs to get pictures
+  playerhead:
+    description: Set texture of craftable playerheads
+
