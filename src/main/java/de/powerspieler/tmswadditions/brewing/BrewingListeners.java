@@ -3,6 +3,7 @@ package de.powerspieler.tmswadditions.brewing;
 import de.powerspieler.tmswadditions.TMSWAdditions;
 import de.powerspieler.tmswadditions.brewing.events.BrewItemEvent;
 import de.powerspieler.tmswadditions.brewing.results.*;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
@@ -10,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Tag;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -97,6 +99,7 @@ public class BrewingListeners implements Listener {
         new BukkitRunnable() {
             int process = 0;
             Location particleloc;
+            final Audience targets = location.getWorld().filterAudience(member -> member instanceof Player player && player.getLocation().distanceSquared(location) < 625);
             @Override
             public void run() {
                 if(!(location.getBlock().getType() == Material.WATER_CAULDRON)){
@@ -110,7 +113,7 @@ public class BrewingListeners implements Listener {
                 }
 
                 if((process == 0 || process % 100 == 0) && process % 2 == 0){
-                    location.getWorld().playSound(Sound.sound(Key.key("ambient.underwater.loop"), Sound.Source.AMBIENT, 1f, 1f));
+                    targets.playSound(Sound.sound(Key.key("ambient.underwater.loop"), Sound.Source.AMBIENT, 1f, 0.1f), Sound.Emitter.self());
                 }
 
                 if(Tag.WALLS.getValues().contains(location.getBlock().getRelative(1,2,0).getType())){
@@ -131,7 +134,7 @@ public class BrewingListeners implements Listener {
                 }
 
                 if(process == 590){
-                    location.getWorld().playSound(Sound.sound(Key.key("block.brewing_stand.brew"), Sound.Source.AMBIENT, 1f, 1f));
+                    targets.playSound(Sound.sound(Key.key("block.brewing_stand.brew"), Sound.Source.AMBIENT, 1f, 1f), Sound.Emitter.self());
                     location.getBlock().setType(Material.CAULDRON);
                     for(Item ingred : ingredients){
                         ingred.remove();
