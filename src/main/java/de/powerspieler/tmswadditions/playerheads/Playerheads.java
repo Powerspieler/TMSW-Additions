@@ -17,11 +17,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,7 +58,12 @@ public class Playerheads implements TabExecutor, Listener {
                         head.setAmount(amount);
 
                         inHand.setAmount(available - amount);
-                        player.getInventory().addItem(head);
+                        HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(head);
+                        if(!leftover.isEmpty()){
+                            for(ItemStack item : leftover.values()){
+                                player.getWorld().dropItemNaturally(player.getLocation(), item);
+                            }
+                        }
                     } else {
                         PlayerProfile pp = Bukkit.createProfile(UUID.fromString("913a282b-6275-4d2a-a4b0-29ece217e151"));
                         pp.getProperties().add(new ProfileProperty("textures", value));
@@ -70,7 +75,12 @@ public class Playerheads implements TabExecutor, Listener {
                         head.setAmount(amount);
 
                         inHand.setAmount(available - amount);
-                        player.getInventory().addItem(head);
+                        HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(head);
+                        if(!leftover.isEmpty()){
+                            for(ItemStack item : leftover.values()){
+                                player.getWorld().dropItemNaturally(player.getLocation(), item);
+                            }
+                        }
 
                     }
                 } else {

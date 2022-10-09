@@ -8,12 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapID implements TabExecutor {
@@ -41,7 +41,12 @@ public class MapID implements TabExecutor {
                                 MapMeta mapmeta = (MapMeta) map.getItemMeta();
                                 mapmeta.setMapId(id);
                                 map.setItemMeta(mapmeta);
-                                player.getInventory().addItem(map);
+                                HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(map);
+                                if(!leftover.isEmpty()){
+                                    for(ItemStack item : leftover.values()){
+                                        player.getWorld().dropItemNaturally(player.getLocation(), item);
+                                    }
+                                }
                             } else {
                                 player.sendMessage(Component.text("ID mustn't be below 100000", NamedTextColor.RED));
                             }
