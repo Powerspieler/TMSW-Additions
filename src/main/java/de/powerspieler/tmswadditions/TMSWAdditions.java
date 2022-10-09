@@ -4,6 +4,7 @@ import de.powerspieler.tmswadditions.anti_enderman_grief.PreventPickup;
 import de.powerspieler.tmswadditions.brewing.AwakeBrewery;
 import de.powerspieler.tmswadditions.brewing.BrewingListeners;
 import de.powerspieler.tmswadditions.death_coordinates.DeathCoordinates;
+import de.powerspieler.tmswadditions.encrypt.Encrypt;
 import de.powerspieler.tmswadditions.map_id.MapID;
 import de.powerspieler.tmswadditions.playerheads.DropOnPlayerDeath;
 import de.powerspieler.tmswadditions.playerheads.HeadRecipe;
@@ -32,6 +33,8 @@ public final class TMSWAdditions extends JavaPlugin {
         // DeathCoordinates
         pm.registerEvents(new DeathCoordinates(), this);
         Objects.requireNonNull(getCommand("death")).setExecutor(new DeathCoordinates());
+        // Encrypt
+        Objects.requireNonNull(getCommand("key")).setExecutor(new Encrypt());
         // Map ID
         Objects.requireNonNull(getCommand("map")).setExecutor(new MapID());
         // Playerheads

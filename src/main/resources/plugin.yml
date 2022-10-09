@@ -10,4 +10,6 @@ commands:
     description: Convert MapIDs to get pictures
   playerhead:
     description: Set texture of craftable playerheads
+  key:
+    description: Add a hidden lore to any item to make them unique
 
