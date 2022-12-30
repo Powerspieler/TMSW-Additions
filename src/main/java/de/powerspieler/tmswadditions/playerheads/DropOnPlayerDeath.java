@@ -3,6 +3,7 @@ package de.powerspieler.tmswadditions.playerheads;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -17,19 +18,21 @@ import java.util.List;
 public class DropOnPlayerDeath implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event){
-        OfflinePlayer skullowner = Bukkit.getOfflinePlayer(event.getPlayer().getName());
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta headmeta = (SkullMeta) head.getItemMeta();
-        headmeta.setOwningPlayer(skullowner);
+        if(event.getPlayer().getGameMode() == GameMode.SURVIVAL){
+            OfflinePlayer skullowner = Bukkit.getOfflinePlayer(event.getPlayer().getName());
+            ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+            SkullMeta headmeta = (SkullMeta) head.getItemMeta();
+            headmeta.setOwningPlayer(skullowner);
 
-        if(event.getPlayer().getKiller() != null){
-            String killer = event.getPlayer().getKiller().getName();
-            List<Component> lore = new ArrayList<>();
-            lore.add(Component.text("Killed by " + killer)
-                    .decoration(TextDecoration.ITALIC, false));
-            headmeta.lore(lore);
+            if(event.getPlayer().getKiller() != null){
+                String killer = event.getPlayer().getKiller().getName();
+                List<Component> lore = new ArrayList<>();
+                lore.add(Component.text("Killed by " + killer)
+                        .decoration(TextDecoration.ITALIC, false));
+                headmeta.lore(lore);
+            }
+            head.setItemMeta(headmeta);
+            event.getDrops().add(head);
         }
-        head.setItemMeta(headmeta);
-        event.getDrops().add(head);
     }
 }
