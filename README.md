@@ -1,6 +1,6 @@
 # TMSW-Additions
 Little Additions for Minecraft Vanilla Survival Worlds  
-Developed for Paper 1.19.2
+Developed for Paper
 
 ## Features
 > **Anti Enderman Grief**
