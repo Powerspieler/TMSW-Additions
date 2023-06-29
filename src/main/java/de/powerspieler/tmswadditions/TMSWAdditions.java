@@ -11,6 +11,7 @@ import de.powerspieler.tmswadditions.playerheads.HeadRecipe;
 import de.powerspieler.tmswadditions.playerheads.Playerheads;
 import de.powerspieler.tmswadditions.totemmsg.TotemMsg;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,25 +26,50 @@ public final class TMSWAdditions extends JavaPlugin {
         plugin = this;
         PluginManager pm = Bukkit.getPluginManager();
 
+        this.saveDefaultConfig();
+        FileConfiguration config = this.getConfig();
+
+
+
         // Anti Enderman Grief
-        pm.registerEvents(new PreventPickup(), this);
+        if(config.getBoolean("anti-enderman-grief")){
+            pm.registerEvents(new PreventPickup(), this);
+        }
+
         // Brewing
-        pm.registerEvents(new AwakeBrewery(), this);
-        pm.registerEvents(new BrewingListeners(), this);
+        if(config.getBoolean("brewing")){
+            pm.registerEvents(new AwakeBrewery(), this);
+            pm.registerEvents(new BrewingListeners(), this);
+        }
+
         // DeathCoordinates
-        pm.registerEvents(new DeathCoordinates(), this);
-        Objects.requireNonNull(getCommand("death")).setExecutor(new DeathCoordinates());
+        if(config.getBoolean("death")){
+            pm.registerEvents(new DeathCoordinates(), this);
+            Objects.requireNonNull(getCommand("death")).setExecutor(new DeathCoordinates());
+        }
+
         // Encrypt
-        Objects.requireNonNull(getCommand("key")).setExecutor(new Encrypt());
+        if(config.getBoolean("encrypt")){
+            Objects.requireNonNull(getCommand("key")).setExecutor(new Encrypt());
+        }
+
         // Map ID
-        Objects.requireNonNull(getCommand("map")).setExecutor(new MapID());
+        if(config.getBoolean("map-id")){
+            Objects.requireNonNull(getCommand("map")).setExecutor(new MapID());
+        }
+
         // Playerheads
-        new HeadRecipe().registerRecipes();
-        Objects.requireNonNull(getCommand("playerhead")).setExecutor(new Playerheads());
-        pm.registerEvents(new Playerheads(), this);
-        pm.registerEvents(new DropOnPlayerDeath(), this);
+        if(config.getBoolean("playerheads")){
+            new HeadRecipe().registerRecipes();
+            Objects.requireNonNull(getCommand("playerhead")).setExecutor(new Playerheads());
+            pm.registerEvents(new Playerheads(), this);
+            pm.registerEvents(new DropOnPlayerDeath(), this);
+        }
+
         // TotemMSG
-        pm.registerEvents(new TotemMsg(), this);
+        if(config.getBoolean("totemmsg")){
+            pm.registerEvents(new TotemMsg(), this);
+        }
     }
 
     public static TMSWAdditions getPlugin(){

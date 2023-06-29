@@ -1,0 +1,20 @@
+# Whether endermans should be able to pick up blocks.
+anti-enderman-grief: true
+
+# Whether brewing should be enabled (Experimental)
+brewing: false
+
+# Whether death cooridnates should be displayed upon death and with /death.
+death: true
+
+# Whether players should be able to create unique items
+encrypt: true
+
+# Wheter player should be able to set ID of Maps higher than 100k (Custom Paintings)
+map-id: false
+
+# Wheter playerheads should be dropped upon death and allowing a way of crafting custom playerheads.
+playerheads: true
+
+# Wheter a sort of death message should be displayed when a player uses a totem of undying.
+totemmsg: true
