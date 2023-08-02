@@ -13,6 +13,3 @@ commands:
   key:
     description: Add a hidden lore to any item to make them unique
 
-  test:
-    description: testing things
-
