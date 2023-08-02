@@ -2,11 +2,13 @@
 Little Additions for Minecraft Vanilla Survival Worlds  
 Developed for Paper
 
+Every feature can be disable via the config file
+
 ## Features
 > **Anti Enderman Grief**
 
 * Endermans can no longer pickup blocks.
-> **Brewing**  
+> **Brewing**
 
 * Brews some drinks (No explanation in building or usage of ingredients implemented)*
 > **Death Coordinates**  
@@ -27,6 +29,9 @@ Developed for Paper
 * Command: /playerhead
 * Makes playerheads craftable
 * Being able to change their Playername or Texture Value
+> **Skeleton-Info**
+
+* Skeletons display text about their bow enchantments upon death
 > **Totem Message**
 
 * Displays a message when someone used a totem
