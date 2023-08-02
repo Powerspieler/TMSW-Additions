@@ -9,6 +9,7 @@ import de.powerspieler.tmswadditions.map_id.MapID;
 import de.powerspieler.tmswadditions.playerheads.DropOnPlayerDeath;
 import de.powerspieler.tmswadditions.playerheads.HeadRecipe;
 import de.powerspieler.tmswadditions.playerheads.Playerheads;
+import de.powerspieler.tmswadditions.skeletoninfo.OnKill;
 import de.powerspieler.tmswadditions.totemmsg.TotemMsg;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,8 +29,6 @@ public final class TMSWAdditions extends JavaPlugin {
 
         this.saveDefaultConfig();
         FileConfiguration config = this.getConfig();
-
-
 
         // Anti Enderman Grief
         if(config.getBoolean("anti-enderman-grief")){
@@ -64,6 +63,11 @@ public final class TMSWAdditions extends JavaPlugin {
             Objects.requireNonNull(getCommand("playerhead")).setExecutor(new Playerheads());
             pm.registerEvents(new Playerheads(), this);
             pm.registerEvents(new DropOnPlayerDeath(), this);
+        }
+
+        // SkeletonInfo
+        if(config.getBoolean("skeletoninfo")){
+            pm.registerEvents(new OnKill(), this);
         }
 
         // TotemMSG

@@ -16,5 +16,8 @@ map-id: false
 # Wheter playerheads should be dropped upon death and allowing a way of crafting custom playerheads.
 playerheads: true
 
+# Wheter skeletons should display text about their bow enchantments upon death.
+skeletoninfo: true
+
 # Wheter a sort of death message should be displayed when a player uses a totem of undying.
 totemmsg: true
