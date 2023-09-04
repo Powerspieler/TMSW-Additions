@@ -18,6 +18,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
+import java.util.logging.Level;
 
 public final class TMSWAdditions extends JavaPlugin {
 
@@ -37,6 +38,11 @@ public final class TMSWAdditions extends JavaPlugin {
         }
 
         // Armorstand
+        if(!config.contains("armorstand", true)){
+            Bukkit.getLogger().log(Level.INFO, "config not there" + config.getBoolean("armorstand"));
+            config.set("armorstand", config.getBoolean("armorstand"));
+            this.saveConfig();
+        }
         if(config.getBoolean("armorstand")){
             pm.registerEvents(new Armorstand(), this);
         }
@@ -72,6 +78,10 @@ public final class TMSWAdditions extends JavaPlugin {
         }
 
         // SkeletonInfo
+        if(!config.contains("skeletoninfo", true)){
+            config.set("skeletoninfo", config.getBoolean("skeletoninfo"));
+            this.saveConfig();
+        }
         if(config.getBoolean("skeletoninfo")){
             pm.registerEvents(new OnKill(), this);
         }

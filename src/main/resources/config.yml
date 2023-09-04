@@ -24,3 +24,6 @@ skeletoninfo: true
 
 # Wheter a sort of death message should be displayed when a player uses a totem of undying.
 totemmsg: true
+
+# +++ All settings below are new features +++
+placeholder: false
