@@ -8,7 +8,10 @@ Every feature can be disable via the config file
 > **Anti Enderman Grief**
 
 * Endermans can no longer pickup blocks.
-> **Brewing**
+> **Armorstand**
+
+* Rightclick an armorstand with a stick to attach arms.
+> **Brewing (Disabled in Config)**
 
 * Brews some drinks (No explanation in building or usage of ingredients implemented)*
 > **Death Coordinates**  
@@ -19,7 +22,7 @@ Every feature can be disable via the config file
 * Command: /key
 * Give items a hidden string of text
 * A way to make items unique (E.g. Keycards for redstone doors)
-> **MapID**  
+> **MapID (Disabled in Config)**  
 
 * Command: /map
 * Changes the ID of empty maps to greater than 100k

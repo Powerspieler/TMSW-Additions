@@ -1,6 +1,7 @@
 package de.powerspieler.tmswadditions;
 
 import de.powerspieler.tmswadditions.anti_enderman_grief.PreventPickup;
+import de.powerspieler.tmswadditions.armorstand.Armorstand;
 import de.powerspieler.tmswadditions.brewing.AwakeBrewery;
 import de.powerspieler.tmswadditions.brewing.BrewingListeners;
 import de.powerspieler.tmswadditions.death_coordinates.DeathCoordinates;
@@ -33,6 +34,11 @@ public final class TMSWAdditions extends JavaPlugin {
         // Anti Enderman Grief
         if(config.getBoolean("anti-enderman-grief")){
             pm.registerEvents(new PreventPickup(), this);
+        }
+
+        // Armorstand
+        if(config.getBoolean("armorstand")){
+            pm.registerEvents(new Armorstand(), this);
         }
 
         // Brewing

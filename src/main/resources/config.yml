@@ -1,6 +1,9 @@
 # Whether endermans should be able to pick up blocks.
 anti-enderman-grief: true
 
+# Rightclick an armorstand with a stick to attach arms
+armorstand: true
+
 # Whether brewing should be enabled (Experimental)
 brewing: false
 
