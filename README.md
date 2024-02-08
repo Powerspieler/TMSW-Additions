@@ -32,6 +32,9 @@ Every feature can be disable via the config file
 * Command: /playerhead
 * Makes playerheads craftable
 * Being able to change their Playername or Texture Value
+> **Sitting**
+
+* Allows players to sit onto shairs and slabs
 > **Skeleton-Info**
 
 * Skeletons display text about their bow enchantments upon death
