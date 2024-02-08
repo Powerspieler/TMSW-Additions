@@ -29,7 +29,7 @@ public class Sitting implements Listener {
 
     @EventHandler
     private void onStairClick(PlayerInteractEvent event){
-        if(!event.getPlayer().isSneaking() && event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND){
+        if(event.getPlayer().getInventory().getItemInMainHand().isEmpty() && event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND){
             if(event.getClickedBlock() != null && isValidBlock(event.getClickedBlock())){
                 event.setCancelled(true);
 
