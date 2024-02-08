@@ -19,6 +19,9 @@ map-id: false
 # Wheter playerheads should be dropped upon death and allowing a way of crafting custom playerheads.
 playerheads: true
 
+# Wheter players should be able to sit on shairs.
+sitting: true
+
 # Wheter skeletons should display text about their bow enchantments upon death.
 skeletoninfo: true
 

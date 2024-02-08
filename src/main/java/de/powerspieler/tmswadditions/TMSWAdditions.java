@@ -10,6 +10,7 @@ import de.powerspieler.tmswadditions.map_id.MapID;
 import de.powerspieler.tmswadditions.playerheads.DropOnPlayerDeath;
 import de.powerspieler.tmswadditions.playerheads.HeadRecipe;
 import de.powerspieler.tmswadditions.playerheads.Playerheads;
+import de.powerspieler.tmswadditions.sitting.Sitting;
 import de.powerspieler.tmswadditions.skeletoninfo.OnKill;
 import de.powerspieler.tmswadditions.totemmsg.TotemMsg;
 import org.bukkit.Bukkit;
@@ -18,7 +19,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
-import java.util.logging.Level;
 
 public final class TMSWAdditions extends JavaPlugin {
 
@@ -39,7 +39,6 @@ public final class TMSWAdditions extends JavaPlugin {
 
         // Armorstand
         if(!config.contains("armorstand", true)){
-            Bukkit.getLogger().log(Level.INFO, "config not there" + config.getBoolean("armorstand"));
             config.set("armorstand", config.getBoolean("armorstand"));
             this.saveConfig();
         }
@@ -76,6 +75,16 @@ public final class TMSWAdditions extends JavaPlugin {
             pm.registerEvents(new Playerheads(), this);
             pm.registerEvents(new DropOnPlayerDeath(), this);
         }
+
+        // Sitting
+        if(!config.contains("sitting", true)){
+            config.set("sitting", config.getBoolean("sitting"));
+            this.saveConfig();
+        }
+        if(config.getBoolean("sitting")){
+            pm.registerEvents(new Sitting(), this);
+        }
+
 
         // SkeletonInfo
         if(!config.contains("skeletoninfo", true)){
