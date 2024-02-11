@@ -15,21 +15,15 @@ public class TotemMsg implements Listener {
     public void onTotemUse(EntityResurrectEvent event){
         if(!event.isCancelled()){
             if(event.getEntity() instanceof Player player) {
-                String causeraw = null;
-                String cause = null;
                 try {
-                    causeraw = Objects.requireNonNull(player.getLastDamageCause()).getCause().name().toLowerCase();
-                } catch (NullPointerException ignored) {
-                    cause = "Other";
-                }
+                    String cause = Objects.requireNonNull(player.getLastDamageCause()).getCause().name().toLowerCase().replace("_", " ");
+                    Bukkit.broadcast(Component.text(player.getName() + " saved their life from ")
+                            .append(Component.text(cause, NamedTextColor.DARK_PURPLE))
+                            .append(Component.text(" with a "))
+                            .append(Component.text("[Totem of Undying]", NamedTextColor.YELLOW)));
 
-                if(causeraw != null){
-                    cause = causeraw.substring(0,1).toUpperCase() + causeraw.substring(1);
+                } catch (NullPointerException ignored) {
                 }
-                Bukkit.broadcast(Component.text("" + player.getName() + " saved their life with a ")
-                        .append(Component.text("[Totem of Undying]\n", NamedTextColor.YELLOW))
-                        .append(Component.text("Cause: "))
-                        .append(Component.text("" + cause, NamedTextColor.DARK_PURPLE)));
             }
         }
     }
