@@ -30,10 +30,27 @@ public class TotemMsg implements Listener {
                             Arrow arrow = (Arrow) entityEvent.getDamager();
                             PotionEffectType potionEffectType = arrow.getBasePotionData().getType().getEffectType();
 
-                            if(potionEffectType == null){
-                                cause = parseTextWithArticle(entityType);
+                            Player shooter = null;
+                            try{
+                                shooter = (Player) arrow.getShooter();
+                            } catch (ClassCastException ignored){
+                            }
+
+
+                            if(shooter == null){
+                                if(potionEffectType == null){
+                                    cause = parseTextWithArticle(entityType);
+                                } else {
+                                    cause = parseTextWithArticle(entityType).append(parseText(" of ", potionEffectType.translationKey()));
+                                }
                             } else {
-                                cause = parseTextWithArticle(entityType).append(parseText(" of ", potionEffectType.translationKey()));
+                                if(potionEffectType == null){
+                                    cause = parseTextWithArticle(entityType).append(parseText(" shot by ", shooter.getName()));
+                                } else {
+                                    cause = parseTextWithArticle(entityType)
+                                            .append(parseText(" of ", potionEffectType.translationKey())
+                                                    .append(parseText(" shot by ", shooter.getName())));
+                                }
                             }
 
                         } else if (entityType == EntityType.AREA_EFFECT_CLOUD) {
