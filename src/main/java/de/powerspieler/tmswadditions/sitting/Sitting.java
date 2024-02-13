@@ -43,7 +43,6 @@ public class Sitting implements Listener {
                         EntityType.ARROW, CreatureSpawnEvent.SpawnReason.CUSTOM,
                         entity -> {entity.setGravity(false); entity.setRotation(0f,-90f);});
                 arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-                arrow.setGravity(false);
                 arrow.getPersistentDataContainer().set(ARROW_KEY, PersistentDataType.BOOLEAN, true);
                 this.chair_data.put(event.getClickedBlock(), player.getLocation());
                 arrow.addPassenger(player);
