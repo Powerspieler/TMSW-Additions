@@ -1,10 +1,16 @@
 package de.powerspieler.tmswadditions.sitting;
 
 import com.destroystokyo.paper.MaterialSetTag;
+import com.destroystokyo.paper.MaterialTags;
 import de.powerspieler.tmswadditions.TMSWAdditions;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
@@ -30,11 +36,14 @@ public class Sitting implements Listener {
     @EventHandler
     private void onStairClick(PlayerInteractEvent event){
         if(event.getPlayer().getInventory().getItemInMainHand().isEmpty() && event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand() == EquipmentSlot.HAND){
-            if(event.getClickedBlock() != null && isValidBlock(event.getClickedBlock())){
+            if(event.getClickedBlock() != null && isValidBlock(event.getClickedBlock()) && isChairMountable(event.getClickedBlock(), event.getBlockFace(), event.getPlayer())){
                 event.setCancelled(true);
-
                 Player player = event.getPlayer();
-                if(player.getVehicle() != null || chair_data.containsKey(event.getClickedBlock())){
+                if(isChairBlocked(event.getClickedBlock()) || chair_data.containsKey(event.getClickedBlock())){
+                    player.sendActionBar(Component.text("This chair is blocked!", NamedTextColor.RED));
+                    return;
+                }
+                if(player.getVehicle() != null){
                     return;
                 }
 
@@ -55,7 +64,7 @@ public class Sitting implements Listener {
         if(event.getDismounted().getPersistentDataContainer().has(ARROW_KEY)){
             Entity arrow = event.getDismounted();
             Block block = arrow.getWorld().getBlockAt(arrow.getLocation().add(0,0.5,0));
-            event.getEntity().teleport(event.getEntity().getLocation().add(0,0.2,0));
+            event.getEntity().teleport(event.getEntity().getLocation().add(0,0.6,0));
             chair_data.remove(block);
             event.getDismounted().remove();
         }
@@ -70,5 +79,30 @@ public class Sitting implements Listener {
             return slab.getType() == Slab.Type.BOTTOM;
         }
         return false;
+    }
+
+    private boolean isChairBlocked(Block block){
+        Block blockAbove = block.getRelative(BlockFace.UP);
+        if(blockAbove.isSolid()){
+            Material material = blockAbove.getType();
+            return !(MaterialTags.TRAPDOORS.isTagged(material)
+                    || MaterialTags.FENCE_GATES.isTagged(material)
+                    || MaterialTags.DOORS.isTagged(material)
+                    || Tag.BANNERS.isTagged(material));
+        }
+        return false;
+    }
+
+    private boolean isChairMountable(Block block, BlockFace face , Player player){
+        if(face == BlockFace.DOWN){
+            return false;
+        }
+        try{
+            Stairs stair = (Stairs) block.getBlockData();
+            if(stair.getFacing() == face){
+                return block.getLocation().getY() <= player.getLocation().getY() + 0.25;
+            }
+        } catch (ClassCastException ignored){}
+        return true;
     }
 }
