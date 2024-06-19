@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 public class TotemMsg implements Listener {
     @EventHandler
@@ -28,7 +29,7 @@ public class TotemMsg implements Listener {
 
                         if(entityType == EntityType.ARROW){
                             Arrow arrow = (Arrow) entityEvent.getDamager();
-                            PotionEffectType potionEffectType = arrow.getBasePotionData().getType().getEffectType();
+                            PotionType potionType = arrow.getBasePotionType();
 
                             Player shooter = null;
                             try{
@@ -38,31 +39,31 @@ public class TotemMsg implements Listener {
 
 
                             if(shooter == null){
-                                if(potionEffectType == null){
+                                if(potionType == null || potionType.getPotionEffects().isEmpty()){
                                     cause = parseTextWithArticle(entityType);
                                 } else {
-                                    cause = parseTextWithArticle(entityType).append(parseText(" of ", potionEffectType.translationKey()));
+                                    cause = parseTextWithArticle(entityType).append(parseText(" of ", potionType.getPotionEffects().getFirst().getType().translationKey()));
                                 }
                             } else {
-                                if(potionEffectType == null){
+                                if(potionType == null || potionType.getPotionEffects().isEmpty()){
                                     cause = parseTextWithArticle(entityType).append(parseText(" shot by ", shooter.getName()));
                                 } else {
                                     cause = parseTextWithArticle(entityType)
-                                            .append(parseText(" of ", potionEffectType.translationKey())
+                                            .append(parseText(" of ", potionType.getPotionEffects().getFirst().getType().translationKey())
                                                     .append(parseText(" shot by ", shooter.getName())));
                                 }
                             }
 
                         } else if (entityType == EntityType.AREA_EFFECT_CLOUD) {
                             AreaEffectCloud cloud = (AreaEffectCloud) entityEvent.getDamager();
-                            PotionEffectType potionEffectType = cloud.getBasePotionData().getType().getEffectType();
+                            PotionType potionType = cloud.getBasePotionType();
 
-                            if(cloud.hasCustomEffect(PotionEffectType.HARM)){
+                            if(cloud.hasCustomEffect(PotionEffectType.INSTANT_DAMAGE)){
                                 cause = parseTextWithArticle(entityType).append(Component.text(" of the Ender Dragon", NamedTextColor.DARK_PURPLE));
-                            } else if(potionEffectType == null){
+                            } else if(potionType == null || potionType.getPotionEffects().isEmpty()){
                                 cause = parseTextWithArticle(entityType);
                             } else {
-                                cause = parseTextWithArticle(entityType).append(parseText(" of ", potionEffectType.translationKey()));
+                                cause = parseTextWithArticle(entityType).append(parseText(" of ", potionType.getPotionEffects().getFirst().getType().translationKey()));
                             }
 
                         } else if(entityType == EntityType.EVOKER_FANGS){
@@ -76,14 +77,14 @@ public class TotemMsg implements Listener {
                             Player playerOther = (Player) entityEvent.getDamager();
                             cause = parseText("", playerOther.getName());
 
-                        } else if (entityType == EntityType.SPLASH_POTION) {
+                        } else if (entityType == EntityType.POTION) {
                             ThrownPotion potion = (ThrownPotion) entityEvent.getDamager();
-                            PotionEffectType potionEffectType = potion.getPotionMeta().getBasePotionData().getType().getEffectType();
+                            PotionType potionType = potion.getPotionMeta().getBasePotionType();
 
-                            if(potionEffectType == null){
+                            if(potionType == null || potionType.getPotionEffects().isEmpty()){
                                 cause = parseTextWithArticle(entityType);
                             } else {
-                                cause = parseTextWithArticle(entityType).append(parseText(" of ", potionEffectType.translationKey()));
+                                cause = parseTextWithArticle(entityType).append(parseText(" of ", potionType.getPotionEffects().getFirst().getType().translationKey()));
                             }
 
                         } else {
