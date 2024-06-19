@@ -16,9 +16,9 @@ public class Champagne implements Brewing{
     public ItemStack build() {
         ItemStack item = new ItemStack(Material.POTION);
         PotionMeta itemmeta = (PotionMeta) item.getItemMeta();
-        itemmeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 4, true, false), true);
-        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 1, true, false), true);
+        itemmeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.NAUSEA, 200, 4, true, false), true);
+        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.STRENGTH, 200, 1, true, false), true);
         itemmeta.setColor(Color.PURPLE);
         itemmeta.displayName(Component.text("Champagne", NamedTextColor.YELLOW)
                 .decoration(TextDecoration.ITALIC, false));

@@ -17,8 +17,8 @@ public class Wine implements Brewing{
     public ItemStack build() {
         ItemStack item = new ItemStack(Material.POTION);
         PotionMeta itemmeta = (PotionMeta) item.getItemMeta();
-        itemmeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 2, true, false), true);
+        itemmeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.NAUSEA, 200, 2, true, false), true);
         itemmeta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, true, false), true);
         itemmeta.setColor(Color.RED);
         itemmeta.displayName(Component.text("Wine", NamedTextColor.YELLOW)
