@@ -54,33 +54,21 @@ public class Playerheads implements TabExecutor, Listener {
                         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                         SkullMeta headmeta = (SkullMeta) player.getInventory().getItemInMainHand().getItemMeta();
                         headmeta.setOwningPlayer(skullowner);
-                        head.setItemMeta(headmeta);
-                        head.setAmount(amount);
+                        headmeta.itemName(null);
 
-                        inHand.setAmount(available - amount);
-                        HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(head);
-                        if(!leftover.isEmpty()){
-                            for(ItemStack item : leftover.values()){
-                                player.getWorld().dropItemNaturally(player.getLocation(), item);
-                            }
-                        }
+                        // Profile Fix idk
+                        PlayerProfile playerProfile = skullowner.getPlayerProfile();
+                        playerProfile.complete();
+                        setProfileAndGive(player, amount, inHand, available, head, headmeta, playerProfile);
                     } else {
                         PlayerProfile pp = Bukkit.createProfile(UUID.fromString("913a282b-6275-4d2a-a4b0-29ece217e151"));
                         pp.getProperties().add(new ProfileProperty("textures", value));
 
                         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                         SkullMeta headmeta = (SkullMeta) player.getInventory().getItemInMainHand().getItemMeta();
-                        headmeta.setPlayerProfile(pp);
-                        head.setItemMeta(headmeta);
-                        head.setAmount(amount);
+                        headmeta.itemName(Component.text("Head", NamedTextColor.YELLOW));
 
-                        inHand.setAmount(available - amount);
-                        HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(head);
-                        if(!leftover.isEmpty()){
-                            for(ItemStack item : leftover.values()){
-                                player.getWorld().dropItemNaturally(player.getLocation(), item);
-                            }
-                        }
+                        setProfileAndGive(player, amount, inHand, available, head, headmeta, pp);
 
                     }
                 } else {
@@ -115,6 +103,22 @@ public class Playerheads implements TabExecutor, Listener {
             }
         }
         return true;
+    }
+
+    private void setProfileAndGive(Player player, int amount, ItemStack inHand, int available, ItemStack head, SkullMeta headmeta, PlayerProfile playerProfile) {
+        headmeta.setPlayerProfile(playerProfile);
+
+        head.setItemMeta(headmeta);
+        head.setAmount(amount);
+
+
+        inHand.setAmount(available - amount);
+        HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(head);
+        if(!leftover.isEmpty()){
+            for(ItemStack item : leftover.values()){
+                player.getWorld().dropItemNaturally(player.getLocation(), item);
+            }
+        }
     }
 
     @Override
