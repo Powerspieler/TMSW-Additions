@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -15,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 public class TotemMsg implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onTotemUse(EntityResurrectEvent event) {
         if (!event.isCancelled()) {
             if (event.getEntity() instanceof Player player) {
