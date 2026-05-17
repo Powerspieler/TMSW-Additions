@@ -78,7 +78,7 @@ public class TotemMsg implements Listener {
                             Player playerOther = (Player) entityEvent.getDamager();
                             cause = parseText("", playerOther.getName());
 
-                        } else if (entityType == EntityType.POTION) {
+                        } else if (entityType == EntityType.SPLASH_POTION) {
                             ThrownPotion potion = (ThrownPotion) entityEvent.getDamager();
                             PotionType potionType = potion.getPotionMeta().getBasePotionType();
 
