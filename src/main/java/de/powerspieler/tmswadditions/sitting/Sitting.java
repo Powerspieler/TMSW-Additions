@@ -1,7 +1,6 @@
 package de.powerspieler.tmswadditions.sitting;
 
 import com.destroystokyo.paper.MaterialSetTag;
-import com.destroystokyo.paper.MaterialTags;
 import de.powerspieler.tmswadditions.TMSWAdditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -64,9 +63,9 @@ public class Sitting implements Listener {
         if(event.getDismounted().getPersistentDataContainer().has(ARROW_KEY)){
             Entity arrow = event.getDismounted();
             Block block = arrow.getWorld().getBlockAt(arrow.getLocation().add(0,0.5,0));
-            event.getEntity().teleport(event.getEntity().getLocation().add(0,0.6,0));
             chair_data.remove(block);
             event.getDismounted().remove();
+            event.getEntity().teleport(event.getEntity().getLocation().add(0,0.75,0));
         }
     }
 
@@ -85,9 +84,9 @@ public class Sitting implements Listener {
         Block blockAbove = block.getRelative(BlockFace.UP);
         if(blockAbove.isSolid()){
             Material material = blockAbove.getType();
-            return !(MaterialTags.TRAPDOORS.isTagged(material)
-                    || MaterialTags.FENCE_GATES.isTagged(material)
-                    || MaterialTags.DOORS.isTagged(material)
+            return !(Tag.TRAPDOORS.isTagged(material)
+                    || Tag.FENCE_GATES.isTagged(material)
+                    || Tag.DOORS.isTagged(material)
                     || Tag.BANNERS.isTagged(material));
         }
         return false;
